@@ -17,9 +17,11 @@ def sms():
     #print "requestArgs"
     #print requestArgs
 
-    requestFormBody = request.form.get('Body')
+    requestFormBody = request.form.get('From')
     print "requestFormBody"
     print requestFormBody
+
+    #requestFormFrom = 
 
     #requestData = request.data
     #print "requestData"
@@ -38,7 +40,7 @@ def sms():
 
     #toPrint = "testing 123"
  
-    return str(response)
+    return str(requestFormBody)
  
 if __name__ == "__main__":
     app.debug = True
