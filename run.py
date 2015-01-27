@@ -18,8 +18,10 @@ def getCookie():
     # Save the new counter value in the session
     session['counter'] = counter
 
+    message = "Hello, Mobile Monkey"
+
     resp = twilio.twiml.Response()
-    resp.message("Hello, Mobile Monkey")
+    resp.sms(message)
     return str(counter)
 
 
