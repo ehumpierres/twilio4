@@ -16,14 +16,14 @@ def sms():
     body = request.form['Body']
     #twml.sms("You've sent " + str(messagecount) + " messages in this conversation so far")
  
-    #resp = make_response(str(twml))
+    resp = make_response(str(body))
  
     #expires=datetime.utcnow() + timedelta(hours=4)
     #resp.set_cookie('messagecount',value=str(messagecount),expires=expires.strftime('%a, %d %b %Y %H:%M:%S GMT'))
 
 
  
-    return body
+    return resp
  
 if __name__ == "__main__":
     app.debug = True
