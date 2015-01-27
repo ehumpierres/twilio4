@@ -17,7 +17,7 @@ def sms():
     #print "requestArgs"
     #print requestArgs
 
-    requestFormSid = request.form.get('MessageSid')
+    requestFormSid = request.form.get('Body')
     print "requestFormBody"
     print requestFormSid
 
