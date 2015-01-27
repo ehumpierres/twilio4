@@ -27,7 +27,7 @@ def sms():
 
 
     response = twiml.Response()
-    response.message("Let's try this out 2233")
+    response.message(str(requestFormBody))
     
     #twml.sms("You've sent " + str(messagecount) + " messages in this conversation so far")
  
