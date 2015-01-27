@@ -1,10 +1,10 @@
-from flask import Flask, request, make_response
+from flask import Flask, request, make_response, session
 from datetime import datetime, timedelta
 from twilio import twiml
  
 app = Flask(__name__)
  
-@app.route("/sms")
+@app.route("/")
 def sms():
  
     #get the cookie value, or default to zero
