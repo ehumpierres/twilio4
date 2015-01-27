@@ -12,10 +12,22 @@ def sms():
     #messagecount = int(request.cookies.get('messagecount',0))
     #messagecount += 1
  
-    body1 = flask.request['Body']
+
+    #requestArgs = request.args
+    #print "requestArgs"
+    #print requestArgs
+
+    requestFormBody = request.form.get('Body')
+    print "requestFormBody"
+    print requestFormBody
+
+    #requestData = request.data
+    #print "requestData"
+    #print requestData
+
 
     response = twiml.Response()
-    response.message("Let's try this out 2")
+    response.message("Let's try this out 2233")
     
     #twml.sms("You've sent " + str(messagecount) + " messages in this conversation so far")
  
@@ -26,7 +38,7 @@ def sms():
 
     #toPrint = "testing 123"
  
-    return str(body1)
+    return str(response)
  
 if __name__ == "__main__":
     app.debug = True
