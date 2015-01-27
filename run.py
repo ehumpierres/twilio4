@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response, session, render_template, url_for
+from flask import Flask, request, make_response, session, render_template, url_for, redirect
 from datetime import datetime, timedelta
 from twilio import twiml
 from twilio.rest import TwilioRestClient
@@ -12,10 +12,10 @@ def sms():
     #messagecount = int(request.cookies.get('messagecount',0))
     #messagecount += 1
  
-    #body = request.form['Body']
+    body = request.body
 
     response = twiml.Response()
-    response.message("Let's try this out")
+    response.message("Let's try this out 2")
     
     #twml.sms("You've sent " + str(messagecount) + " messages in this conversation so far")
  
@@ -24,9 +24,9 @@ def sms():
     #expires=datetime.utcnow() + timedelta(hours=4)
     #resp.set_cookie('messagecount',value=str(messagecount),expires=expires.strftime('%a, %d %b %Y %H:%M:%S GMT'))
 
-    toPrint = "testing 123"
+    #toPrint = "testing 123"
  
-    return str(toPrint)
+    return str(body)
  
 if __name__ == "__main__":
     app.debug = True
