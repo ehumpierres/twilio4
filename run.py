@@ -20,7 +20,7 @@ def getCookie():
 
     resp = twilio.twiml.Response()
     resp.message("Hello, Mobile Monkey")
-    return str(resp)
+    return str(counter)
 
 
 
