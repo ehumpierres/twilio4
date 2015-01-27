@@ -10,19 +10,15 @@ app.config.from_object(__name__)
 def getCookie():
     """Respond to incoming calls with a simple text message."""
  
-    counter = session.get('counter', 0)
- 
-    # increment the counter
-    counter += 1
- 
-    # Save the new counter value in the session
-    session['counter'] = counter
-
+    
+	convo = request.cookies()   
+  
     message = "Hello, Mobile Monkey"
 
     resp = twilio.twiml.Response()
     resp.sms(message)
-    return str(counter)
+    return str(convo)
+
 
 
 
