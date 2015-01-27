@@ -15,7 +15,7 @@ callers = {
 }
 
 @app.route("/", methods=['GET', 'POST'])
-def getConvo():
+def hello_monkey():
     """Respond with the number of text messages sent between two parties."""
  
  	username = request.cookies.get('ernesto@gotrotter.com')
