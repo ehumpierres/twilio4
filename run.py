@@ -12,7 +12,7 @@ def sms():
     #messagecount = int(request.cookies.get('messagecount',0))
     #messagecount += 1
  
-    body = request.body
+    body1 = request.body()
 
     response = twiml.Response()
     response.message("Let's try this out 2")
@@ -26,7 +26,7 @@ def sms():
 
     #toPrint = "testing 123"
  
-    return str(body)
+    return str(body1)
  
 if __name__ == "__main__":
     app.debug = True
