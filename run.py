@@ -5,14 +5,14 @@ from twilio.rest import TwilioRestClient
  
 app = Flask(__name__)
  
-@app.route("/")
+@app.route("/",methods=['GET', 'POST'])
 def sms():
  
     #get the cookie value, or default to zero
     #messagecount = int(request.cookies.get('messagecount',0))
     #messagecount += 1
  
-    twml = twiml.Response.Message()
+    body = request.form['Body']
 
     #body = request.form['Body']
     #twml.sms("You've sent " + str(messagecount) + " messages in this conversation so far")
@@ -22,9 +22,9 @@ def sms():
     #expires=datetime.utcnow() + timedelta(hours=4)
     #resp.set_cookie('messagecount',value=str(messagecount),expires=expires.strftime('%a, %d %b %Y %H:%M:%S GMT'))
 
-
+    toPrint = "testing 123"
  
-    return str(twml)
+    return str(toPrint)
  
 if __name__ == "__main__":
     app.debug = True
