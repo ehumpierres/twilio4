@@ -36,6 +36,9 @@ def hello_monkey():
         str(counter), " times."])
     resp = twilio.twiml.Response()
     resp.sms(message)
+    
+    resp.message("Hello, Mobile Monkey")
+
  
     return str(resp)
  
