@@ -17,7 +17,7 @@ def sms():
     #print "requestArgs"
     #print requestArgs
 
-    requestFormSid = request.form.get('Body')
+    requestFormSid = request.form.get('MessageSid')
    
     #requestFormFrom = 
 
@@ -27,7 +27,7 @@ def sms():
 
 
     response = twiml.Response()
-    response.message(str(requestFormSid))
+    response.message(str(requestFormSid)
     
     #twml.sms("You've sent " + str(messagecount) + " messages in this conversation so far")
  
@@ -38,7 +38,7 @@ def sms():
 
     #toPrint = "testing 123"
  
-    return str(requestFormSid)
+    return str(response)
  
 if __name__ == "__main__":
     app.debug = True
