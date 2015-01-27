@@ -12,7 +12,7 @@ def sms():
     #messagecount = int(request.cookies.get('messagecount',0))
     #messagecount += 1
  
-    body1 = flask.request.form
+    body1 = flask.request['Body']
 
     response = twiml.Response()
     response.message("Let's try this out 2")
