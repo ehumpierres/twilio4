@@ -12,7 +12,7 @@ def sms():
     #messagecount = int(request.cookies.get('messagecount',0))
     #messagecount += 1
  
-    twml = twiml.Response()
+    twml = twiml.Response.Message()
 
     #body = request.form['Body']
     #twml.sms("You've sent " + str(messagecount) + " messages in this conversation so far")
