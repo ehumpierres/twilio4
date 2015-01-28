@@ -8,38 +8,41 @@ app = Flask(__name__)
 @app.route("/",methods=['GET', 'POST'])
 def sms():
  
-    #get the cookie value, or default to zero
-    #messagecount = int(request.cookies.get('messagecount',0))
-    #messagecount += 1
- 
-
-    #requestArgs = request.args
-    #print "requestArgs"
-    #print requestArgs
 
     requestFormSid = request.form.get('MessageSid')
-   
-    #requestFormFrom = 
-
-    #requestData = request.data
-    #print "requestData"
-    #print requestData
-
 
     response = twiml.Response()
-    response.message("str(requestFormSid)")
+    response.message(str(requestFormSid))
     
-    #twml.sms("You've sent " + str(messagecount) + " messages in this conversation so far")
- 
-    #resp = make_response(str(body))
- 
-    #expires=datetime.utcnow() + timedelta(hours=4)
-    #resp.set_cookie('messagecount',value=str(messagecount),expires=expires.strftime('%a, %d %b %Y %H:%M:%S GMT'))
-
-    #toPrint = "testing 123"
- 
     return str(response)
+
+
+@app.route("/output",methods=['GET', 'POST'])
+def output():
+
+	f = open('index.html','w')
+
+    output = """ <html>
+			<head>
+ 				<title>Feature information</title>
+			</head>
+			<body>
+				<p>This is a test</p>
+			</body>
+		</html> """
+
+	f.write(output)
+	f.close()
+
+	return render_template('index.html')	
+
+	
  
 if __name__ == "__main__":
     app.debug = True
     app.run()
+
+
+
+#@app.route("/",methods=['POST'])
+
