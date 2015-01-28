@@ -20,15 +20,13 @@ def sms():
 @app.route("/output",methods=['GET', 'POST'])
 def output():
 
-  content = """
-     testeando
-   """
-  user = "Hero234"
 
+	response = make_response(render_template('output.html')
 
-  return render_template('output.html', **locals())
+  	return response
+
+  	
 	
- 
 if __name__ == "__main__":
     app.debug = True
     app.run()
