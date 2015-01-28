@@ -21,11 +21,12 @@ def sms():
 def output():
 
   content = """
-     teste
+     testeando
    """
-  user = "Hero"
-  return render_template('index.html', **locals())
+  user = "Hero234"
 
+
+  return render_template('output.html', **locals())
 	
  
 if __name__ == "__main__":
