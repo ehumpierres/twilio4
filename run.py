@@ -20,21 +20,11 @@ def sms():
 @app.route("/output",methods=['GET', 'POST'])
 def output():
 
-	f = open('index.html','w')
-
-    output = """ <html>
-			<head>
- 				<title>Feature information</title>
-			</head>
-			<body>
-				<p>This is a test</p>
-			</body>
-		</html> """
-
-	f.write(output)
-	f.close()
-
-	return render_template('index.html')	
+  content = """
+     teste
+   """
+  user = "Hero"
+  return render_template('index.html', **locals())
 
 	
  
@@ -43,6 +33,4 @@ if __name__ == "__main__":
     app.run()
 
 
-
-#@app.route("/",methods=['POST'])
 
