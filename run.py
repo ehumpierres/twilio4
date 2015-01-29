@@ -37,8 +37,9 @@ def index():
     response = twiml.Response()
     response.message(str(requestFormSid))
 
-    # THIS code is for exploring the cookies that Twilio sends and where conversations are tracked
-    
+    # COOKIES for keeping track of convversations
+    # Read --> https://www.twilio.com/blog/2014/07/the-definitive-guide-to-sms-conversation-tracking.html
+    cookieContent = request.cookies.get('messagecount')    
 
 
     # The following code is for testing the variables received, using the browser
@@ -52,7 +53,20 @@ def index():
     text_file.write(str(j) + '\n')
     text_file.write(str(k) + '\n')
     text_file.write("payload:: %s %s %s %s" % (requestFormSid, requestFormFrom, requestFormTo, requestFormBody))
-	
+    
+    text_file.close()
+
+    x = "title: Some cookie"
+    y = "date: 2015-01-27"
+    z = ""
+    
+    text_file = open("pages/cookie.md", "w")
+
+    text_file.write(str(x) + '\n')
+    text_file.write(str(y) + '\n')
+    text_file.write(str(z) + '\n')
+    text_file.write("payload:: %s" % cookieContent)
+    
     text_file.close()
     # END of the testing code
  
@@ -64,6 +78,12 @@ def test(test):
     return pages.get_or_404(test).html
 # END of testing code
 
+# This code below is just for testing output of cookies via the browser
+@app.route('/output/<path:cookie>')
+def cookie(cookie):
+    return pages.get_or_404(cookie).html
+# END of testing code
+
 # WITH THIS TWILIO CODE WE CAN SEND SMS TO ANY NUMBER
 @app.route('/send/',methods=['GET', 'POST'])
 def send():
@@ -71,28 +91,31 @@ def send():
     try: # This handles if the To (recipient) number is invalid
 
     # Trotter's Account Sid and Auth Token from twilio.com/user/account
-    account_sid = "AC1b3fcf6eb7ae41aa1c8f5dbf47cde6a9"
-    auth_token  = "d634dffc544604661e8749d6328c413c"
-    client = TwilioRestClient(account_sid, auth_token)
+      account_sid = "AC1b3fcf6eb7ae41aa1c8f5dbf47cde6a9"
+      auth_token  = "d634dffc544604661e8749d6328c413c"
+      client = TwilioRestClient(account_sid, auth_token)
  
-    # Here we generate the data necessary to send the sms
-    payload =   "this is the message for the sms"
-    recipient = "+16178428225"
-    sender =    "+16179345762"
+      # Here we generate the data necessary to send the sms
+      payload =   "this is the message for the sms"
+      recipient = "+16178428225"
+      sender =    "+16179345762"
 
-    # This code sends the sms, we can create all sorts of stuctures to handle and pass the parameters
-    message = client.messages.create(body=payload, to=recipient, from_=sender)
+      # This code sends the sms, we can create all sorts of stuctures to handle and pass the parameters
+      message = client.messages.create(body=payload, to=recipient, from_=sender)
 
 
-    return "success"
+      return "success"
 
     except twilio.TwilioRestException as e:
-    print e
+      print e
 
-    return "failed"
+      return "failed"
+
+
+   
 
 
     
 
 if __name__ == '__main__':
-	app.run(port=8000)
+    app.run(port=8000)
