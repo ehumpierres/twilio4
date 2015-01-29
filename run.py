@@ -1,33 +1,40 @@
+# FOR TWILIO we need at least to import twiml, TwilioRestClient, and Flask request
 from flask import Flask, request, make_response, session, render_template, url_for, redirect
 from datetime import datetime, timedelta
 from twilio import twiml
 from twilio.rest import TwilioRestClient
 from flask_flatpages import FlatPages
 
+
+# We don't need this, I was using it to print to the browser
 DEBUG = True
 FLATPAGES_AUTO_RELOAD = DEBUG
 FLATPAGES_EXTENSION = '.md'
 
 app = Flask(__name__)
-app.config.from_object(__name__)
-pages = FlatPages(app)
+app.config.from_object(__name__)    # Not sure we need this, perhaps not
+pages = FlatPages(app)              # We don't need this in production 
 
-#counter = 1
+counter = 0
 
-@app.route('/',methods=['GET', 'POST'])
+# IF WE WANT to change the URL with whiCH we receive Twilio sms
+#   go to do it--> https://www.twilio.com/user/account/phone-numbers/incoming 
+@app.route('/',methods=['GET', 'POST']) 
 def index():
 
+    # THIS CODE IS FOR RECEIVING AN SMS VIA A POST from the Twilio server acting as client
+    # Read--> https://www.twilio.com/docs/api/twiml/sms/twilio_request for more parameters
+    requestFormSid = request.form.get('MessageSid') # This is the unique identifier of the message
+    requestFormFrom = request.form.get('From')      # This is the number that sent us the sms
+    requestFormTo = request.form.get('To')          # This is the Twilio number we used to receive the sms
+    requestFormBody = request.form.get('Body')      # This is the content of the sms that then needs to be parsed for urls
 
-    requestFormSid = request.form.get('MessageSid')
-    requestFormFrom = request.form.get('From')
-    requestFormTo = request.form.get('To')
-    requestFormBody = request.form.get('Body')
-
+    # THIS TWILIO CODE is for replying back to a received message
+    # Read--> 
     response = twiml.Response()
     response.message(str(requestFormSid))
 
-    #ToPrint = str(requestFormSid)
-
+    # The following code is for testing the variables received, using the browser
     i = "title: Some title"
     j = "date: 2015-01-27"
     k = ""
@@ -40,14 +47,17 @@ def index():
     text_file.write("payload:: %s %s %s %s" % (requestFormSid, requestFormFrom, requestFormTo, requestFormBody))
 	
     text_file.close()
+    # END of the testing code
  
     return str(response)
 
+# This code right belo is just for testing output via the browser
 @app.route('/output/<path:test>')
 def test(test):
     return pages.get_or_404(test).html
+# END of testing code
 
-
+# WITH THIS TWILIO CODE WE CAN SEND SMS TO ANY NUMBER
 @app.route('/send/',methods=['GET', 'POST'])
 def send():
 
@@ -56,11 +66,12 @@ def send():
     auth_token  = "d634dffc544604661e8749d6328c413c"
     client = TwilioRestClient(account_sid, auth_token)
  
+    # This code sends the sms, we can create all sorts of stuctures to handle and pass the parameters
     message = client.messages.create(body="Probando 1,2,3..", to="+16178428225", from_="+16179345762")
 
-    #counter =+ 1
+    counter =+ 1  # This was just for testing
 
-    return "success: "
+    return str("success: " + counter)
    
 
     
