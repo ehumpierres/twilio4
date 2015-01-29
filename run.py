@@ -12,6 +12,8 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 pages = FlatPages(app)
 
+counter = 0
+
 @app.route('/',methods=['GET', 'POST'])
 def index():
 
@@ -41,19 +43,27 @@ def index():
  
     return str(response)
 
-#@app.route('/<path:path>/')
-@app.route('/test')
-def test(path):
-	return pages.get_or_404(path).html
+@app.route('/output/<path:test>')
+def test(test):
+    return pages.get_or_404(test).html
 
 
-#@app.route('/',methods=['GET', 'POST'])
-#def sendSMS():
+@app.route('/send/',methods=['GET', 'POST'])
+def send():
 
+    # Trotter's Account Sid and Auth Token from twilio.com/user/account
+    account_sid = "AC1b3fcf6eb7ae41aa1c8f5dbf47cde6a9"
+    auth_token  = "d634dffc544604661e8749d6328c413c"
+    client = TwilioRestClient(account_sid, auth_token)
+ 
+    message = client.messages.create(body="Probando 1,2,3..", to="+16178428225", from_="+16179345762")
 
+    counter =+ 1
 
+    return str("success: " + counter)
+   
 
-
+    
 
 if __name__ == '__main__':
 	app.run(port=8000)
