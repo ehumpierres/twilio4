@@ -1,5 +1,6 @@
 # FOR TWILIO we need at least to import twiml, TwilioRestClient, and Flask request
-# FOR API instructions --> twilio.com AND https://twilio-python.readthedocs.org/en/latest/
+# FOR API instructions --> https://www.twilio.com/docs/api/rest/message
+#    and https://twilio-python.readthedocs.org/en/latest/
 from flask import Flask, request, make_response, session, render_template, url_for, redirect
 from datetime import datetime, timedelta
 from twilio import twiml
@@ -16,7 +17,7 @@ app = Flask(__name__)
 app.config.from_object(__name__)    # Not sure we need this, perhaps not
 pages = FlatPages(app)              # We don't need this in production 
 
-counter = 0
+
 
 # IF WE WANT to change the URL with whiCH we receive Twilio sms
 #   go to do it--> https://www.twilio.com/user/account/phone-numbers/incoming 
@@ -32,10 +33,11 @@ def index():
 
     # THIS TWILIO CODE is for replying back to a received message
     # Read--> https://www.twilio.com/docs/quickstart/python/sms/replying-to-sms-messages
+    # Read--> https://www.twilio.com/docs/api/rest/message
     response = twiml.Response()
     response.message(str(requestFormSid))
 
-    # THIS code is for exploring the cookies that Twilio sends and were conversations are tracked
+    # THIS code is for exploring the cookies that Twilio sends and where conversations are tracked
     
 
 
@@ -66,6 +68,8 @@ def test(test):
 @app.route('/send/',methods=['GET', 'POST'])
 def send():
 
+    try: # This handles if the To (recipient) number is invalid
+
     # Trotter's Account Sid and Auth Token from twilio.com/user/account
     account_sid = "AC1b3fcf6eb7ae41aa1c8f5dbf47cde6a9"
     auth_token  = "d634dffc544604661e8749d6328c413c"
@@ -79,10 +83,14 @@ def send():
     # This code sends the sms, we can create all sorts of stuctures to handle and pass the parameters
     message = client.messages.create(body=payload, to=recipient, from_=sender)
 
-    counter = counter + 1  # This is just for testing
 
-    return str("success: " + str(counter)) 
-   
+    return "success"
+
+    except twilio.TwilioRestException as e:
+    print e
+
+    return "failed"
+
 
     
 
