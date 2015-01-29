@@ -39,7 +39,7 @@ def index():
 
     # COOKIES for keeping track of convversations
     # Read --> https://www.twilio.com/blog/2014/07/the-definitive-guide-to-sms-conversation-tracking.html
-    cookieContent = request.cookies.get('messagecount')    
+    cookieContent = request.cookies.get('version')    
 
 
     # The following code is for testing the variables received, using the browser
