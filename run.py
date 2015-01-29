@@ -30,7 +30,7 @@ def index():
     j = "date: 2015-01-27"
     k = ""
     
-    text_file = open("pages/pest.md", "w")
+    text_file = open("pages/test.md", "w")
 
     text_file.write(str(i) + '\n')
     text_file.write(str(j) + '\n')
@@ -41,9 +41,19 @@ def index():
  
     return str(response)
 
-@app.route('/<path:path>/')
-def page(path):
+#@app.route('/<path:path>/')
+@app.route('/test')
+def test(path):
 	return pages.get_or_404(path).html
+
+
+#@app.route('/',methods=['GET', 'POST'])
+#def sendSMS():
+
+
+
+
+
 
 if __name__ == '__main__':
 	app.run(port=8000)
