@@ -22,7 +22,7 @@ def index():
     response.message(str(requestFormSid))
 
 
-    TotalAmount = "55555"
+    ToPrint = str(requestFormSid)
 
     i = "title: Some title"
     j = "date: 2015-01-27"
@@ -34,7 +34,7 @@ def index():
     text_file.write(str(i) + '\n')
     text_file.write(str(j) + '\n')
     text_file.write(str(k) + '\n')
-    text_file.write("number I'm looking for %s" % TotalAmount)
+    text_file.write("number I'm looking for %s" % ToPrint)
 	
     text_file.close()
  
