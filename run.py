@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 pages = FlatPages(app)
 
-counter = 0
+#counter = 0
 
 @app.route('/',methods=['GET', 'POST'])
 def index():
@@ -58,9 +58,9 @@ def send():
  
     message = client.messages.create(body="Probando 1,2,3..", to="+16178428225", from_="+16179345762")
 
-    counter =+ 1
+    #counter =+ 1
 
-    return str("success: " + counter)
+    return "success: "
    
 
     
