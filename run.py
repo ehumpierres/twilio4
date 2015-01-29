@@ -17,24 +17,25 @@ def index():
 
 
     requestFormSid = request.form.get('MessageSid')
+    requestFormFrom = request.form.get('From')
+    requestFormTo = request.form.get('To')
+    requestFormBody = request.form.get('Body')
 
     response = twiml.Response()
     response.message(str(requestFormSid))
 
-
-    ToPrint = str(requestFormSid)
+    #ToPrint = str(requestFormSid)
 
     i = "title: Some title"
     j = "date: 2015-01-27"
     k = ""
-    l = "test this crap"
-	
+    
     text_file = open("pages/pest.md", "w")
 
     text_file.write(str(i) + '\n')
     text_file.write(str(j) + '\n')
     text_file.write(str(k) + '\n')
-    text_file.write("number I'm looking for %s" % ToPrint)
+    text_file.write("payload:: %s %s %s %s" % (requestFormSid, requestFormFrom, requestFormTo, requestFormBody))
 	
     text_file.close()
  
