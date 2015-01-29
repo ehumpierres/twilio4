@@ -35,6 +35,10 @@ def index():
     response = twiml.Response()
     response.message(str(requestFormSid))
 
+    # THIS code is for exploring the cookies that Twilio sends and were conversations are tracked
+    
+
+
     # The following code is for testing the variables received, using the browser
     i = "title: Some title"
     j = "date: 2015-01-27"
@@ -75,7 +79,7 @@ def send():
     # This code sends the sms, we can create all sorts of stuctures to handle and pass the parameters
     message = client.messages.create(body=payload, to=recipient, from_=sender)
 
-    counter++  # This was just for testing
+    counter = counter + 1  # This is just for testing
 
     return str("success: " + str(counter)) 
    
