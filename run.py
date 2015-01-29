@@ -1,4 +1,5 @@
 # FOR TWILIO we need at least to import twiml, TwilioRestClient, and Flask request
+# FOR API instructions --> twilio.com AND https://twilio-python.readthedocs.org/en/latest/
 from flask import Flask, request, make_response, session, render_template, url_for, redirect
 from datetime import datetime, timedelta
 from twilio import twiml
@@ -30,7 +31,7 @@ def index():
     requestFormBody = request.form.get('Body')      # This is the content of the sms that then needs to be parsed for urls
 
     # THIS TWILIO CODE is for replying back to a received message
-    # Read--> 
+    # Read--> https://www.twilio.com/docs/quickstart/python/sms/replying-to-sms-messages
     response = twiml.Response()
     response.message(str(requestFormSid))
 
@@ -51,7 +52,7 @@ def index():
  
     return str(response)
 
-# This code right belo is just for testing output via the browser
+# This code below is just for testing output via the browser
 @app.route('/output/<path:test>')
 def test(test):
     return pages.get_or_404(test).html
@@ -66,12 +67,17 @@ def send():
     auth_token  = "d634dffc544604661e8749d6328c413c"
     client = TwilioRestClient(account_sid, auth_token)
  
+    # Here we generate the data necessary to send the sms
+    payload =   "this is the message for the sms"
+    recipient = "+16178428225"
+    sender =    "+16179345762"
+
     # This code sends the sms, we can create all sorts of stuctures to handle and pass the parameters
-    message = client.messages.create(body="Probando 1,2,3..", to="+16178428225", from_="+16179345762")
+    message = client.messages.create(body=payload, to=recipient, from_=sender)
 
-    counter =+ 1  # This was just for testing
+    counter++  # This was just for testing
 
-    return str("success: " + counter)
+    return str("success: " + str(counter)) 
    
 
     
