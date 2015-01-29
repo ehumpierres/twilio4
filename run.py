@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 pages = FlatPages(app)
 
-#counter = 0
+#counter = 1
 
 @app.route('/',methods=['GET', 'POST'])
 def index():
