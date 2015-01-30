@@ -13,6 +13,7 @@ DEBUG = True
 FLATPAGES_AUTO_RELOAD = DEBUG
 FLATPAGES_EXTENSION = '.md'
 
+
 app = Flask(__name__)
 app.config.from_object(__name__)    # Not sure we need this, perhaps not
 pages = FlatPages(app)              # We don't need this in production 
@@ -37,8 +38,10 @@ def index():
     response = twiml.Response()
     response.message(str(requestFormSid))
 
-    # COOKIES for keeping track of convversations
+    # COOKIES for keeping track of convversations, they expire after 4 hours
+    # Read --> https://www.twilio.com/docs/quickstart/python/sms/tracking-conversations
     # Read --> https://www.twilio.com/blog/2014/07/the-definitive-guide-to-sms-conversation-tracking.html
+    # It's possible we might need to use Sessions, might be a Twilio requirement 
     cookieContent = request.cookies.get('version')    
 
 
@@ -110,9 +113,6 @@ def send():
       print e
 
       return "failed"
-
-
-   
 
 
     
